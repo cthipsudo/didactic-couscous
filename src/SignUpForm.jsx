@@ -6,8 +6,10 @@ function SignupForm() {
     const fieldName = evt.target.name;
     const value = evt.target.value;
     setFormData((formData) => {
-      formData[fieldName] = value;
-      return { ...formData };
+      return {
+        ...formData,
+        [fieldName]: value,
+      };
     });
   };
   const handleSubmit = () => {
