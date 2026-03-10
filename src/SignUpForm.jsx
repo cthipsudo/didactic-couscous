@@ -1,13 +1,17 @@
 import { useState } from "react";
 
 function SignupForm() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const updateFirstName = (evt) => {
-    setFirstName(evt.target.value);
+  const [formData, setFormData] = useState({ firstName: "", lastName: "" });
+  const handleChange = (evt) => {
+    const fieldName = evt.target.name;
+    const value = evt.target.value;
+    setFormData((formData) => {
+      formData[fieldName] = value;
+      return { ...formData };
+    });
   };
-  const updateLastName = (evt) => {
-    setLastName(evt.target.value);
+  const handleSubmit = () => {
+    console.log(formData);
   };
   return (
     <div>
@@ -15,19 +19,21 @@ function SignupForm() {
       <input
         type="text"
         placeholder="First Name"
-        value={firstName}
-        onChange={updateFirstName}
+        name="firstName"
+        value={formData.firstName}
+        onChange={handleChange}
         id="firstname"
       />
       <label htmlFor="lastname">Last Name:</label>
       <input
         type="text"
         placeholder="Last Name"
-        value={lastName}
-        onChange={updateLastName}
+        name="lastName"
+        value={formData.lastName}
+        onChange={handleChange}
         id="lastname"
       />
-      <button>Submit</button>
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
 }
